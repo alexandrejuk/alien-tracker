@@ -1,0 +1,23 @@
+version: '2.1'
+services:
+  base:
+    build:
+      context: .
+      dockerfile: ./Dockerfile
+    volumes:
+      - .:/server
+  mongo:
+      image: mongo:4.0.0-xenial
+      volumes:
+        - location_db:/data/db
+  test-server:
+      extends: base
+      command: yarn start
+      environment:
+        - NODE_ENV=production
+      ports:
+        - 5000:3000
+      links:
+        - mongo
+volumes:
+  location_db:

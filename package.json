@@ -1,0 +1,13 @@
+{
+  "scripts": {
+    "start": "node src/app.js"
+  },
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "express": "^4.16.3",
+    "jest": "^23.4.2",
+    "mongoose": "^5.2.6",
+    "morgan": "^1.9.0",
+    "ramda": "^0.25.0"
+  }
+}
