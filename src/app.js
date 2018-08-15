@@ -61,7 +61,7 @@ app.get('/locations', async (request, response, next) => {
         $group: { 
             _id: '$tecnico_id',
             lastId: { $last: '$_id' },
-            latitude: { $last: '$longitude' }, 
+            latitude: { $last: '$latitude' }, 
             longitude: { $last:'$longitude' },
             coordinates: { $last:'$coordinates' },
             time: { $last:'$time' },
