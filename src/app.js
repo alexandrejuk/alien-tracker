@@ -16,7 +16,7 @@ const locationSchema = new mongoose.Schema({
   time: Date,
   provider: String,
   tecnico_id: String,
-}, { versionKey: false })
+}, { versionKey: false, timestamps: true })
 
 const Location = mongoose.model('Location', locationSchema);
 
