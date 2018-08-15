@@ -55,7 +55,27 @@ app.post('/locations', async (request, response, next) => {
 
 app.get('/locations', async (request, response, next) => {
   try {
-    const locations = await  Location.find({})
+    const locations = await  Location.aggregate([
+      { $sort: { date: 1 } },
+      { 
+        $group: { 
+            _id: '$tecnico_id',
+            lastId: { $last: '$_id' },
+            latitude: { $last: '$longitude' }, 
+            longitude: { $last:'$longitude' },
+            coordinates: { $last:'$coordinates' },
+        }
+      },
+      {
+          $project: {
+              _id: '$lastId',
+              tecnico_id: '$_id',
+              latitude: 1, 
+              longitude: 1,
+              coordinates: 1,
+          }
+      }
+    ])
     response.status(200).json(locations);
   } catch (error) {
     next(error)
