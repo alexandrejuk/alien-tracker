@@ -56,7 +56,7 @@ app.post('/locations', async (request, response, next) => {
 app.get('/locations', async (request, response, next) => {
   try {
     const locations = await  Location.aggregate([
-      { $sort: { time: 1 } },
+      { $sort: { createdAt: 1 } },
       { 
         $group: { 
             _id: '$tecnico_id',
@@ -65,6 +65,7 @@ app.get('/locations', async (request, response, next) => {
             longitude: { $last:'$longitude' },
             coordinates: { $last:'$coordinates' },
             time: { $last:'$time' },
+            createdAt: { $last:'$createdAt' },
         }
       },
       {
@@ -75,6 +76,7 @@ app.get('/locations', async (request, response, next) => {
               longitude: 1,
               coordinates: 1,
               time: 1,
+              createdAt: 1,
           }
       }
     ])
