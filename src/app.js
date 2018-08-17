@@ -3,6 +3,7 @@ const bodyParser = require('body-parser')
 const { applySpec, prop, props, map } = require('ramda')
 const morgan = require('morgan')
 const mongoose = require('mongoose')
+const cors = require('cors')
 
 mongoose.connect('mongodb://mongo:27017/locationDB')
   .then(() => console.log("db connected!"))
@@ -35,6 +36,7 @@ const app = express()
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true}))
 
+app.use(cors())
 app.use(morgan('dev'))
 
 
